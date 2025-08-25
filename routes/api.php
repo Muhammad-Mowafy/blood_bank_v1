@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\v1\PostController;
 use App\Http\Controllers\Api\v1\CategoryController;
 use App\Http\Controllers\Api\v1\FavoriteController;
+use App\Http\Controllers\Api\v1\ProfileController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -41,6 +42,10 @@ Route::prefix('v1')->group(function () {
         // Favorites
         Route::get('favorites', [FavoriteController::class, 'index']);
         Route::post('favorites/{postId}/toggle', [FavoriteController::class, 'toggleFavorite']);
+
+        // Profile
+        Route::get('profile', [ProfileController::class, 'show']);
+        Route::put('profile', [ProfileController::class, 'update']);
     });
 
 });
