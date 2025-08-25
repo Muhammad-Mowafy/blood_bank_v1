@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\v1\PostController;
 use App\Http\Controllers\Api\v1\CategoryController;
 use App\Http\Controllers\Api\v1\FavoriteController;
 use App\Http\Controllers\Api\v1\ProfileController;
+use App\Http\Controllers\Api\v1\SettingController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -25,6 +26,9 @@ Route::prefix('v1')->group(function () {
     // Categories
     Route::get('categories', [CategoryController::class, 'index']);
 
+    // Settings
+    Route::get('settings', [SettingController::class, 'index']);
+
     // Auth routes
     Route::prefix('auth')->group(function () {
         Route::post('register', [AuthController::class, 'register']);
@@ -34,7 +38,7 @@ Route::prefix('v1')->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
     });
 
-
+    // Protected routes
     Route::middleware('auth:api')->group(function () {
         // Posts
         Route::apiResource('posts', PostController::class);
@@ -47,6 +51,5 @@ Route::prefix('v1')->group(function () {
         Route::get('profile', [ProfileController::class, 'show']);
         Route::put('profile', [ProfileController::class, 'update']);
     });
-
 });
 
