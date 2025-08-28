@@ -28,6 +28,7 @@ Route::prefix('v1')->group(function () {
 
     // Settings
     Route::get('settings', [SettingController::class, 'index']);
+    Route::put('settings', [SettingController::class, 'update']);
 
     // Auth routes
     Route::prefix('auth')->group(function () {
